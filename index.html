@@ -108,6 +108,15 @@
   .note { margin-top: 16px; font-size: 13px; color: var(--gris); }
   @media (min-width: 820px) { .grille-services { grid-template-columns: repeat(3, 1fr); } }
 
+  /* ============ OFFRE DU MOIS ============ */
+  .offre { padding: 0 0 64px; }
+  .offre-bloc {
+    background: var(--rose); border: 1.5px solid var(--dore); border-radius: 10px;
+    padding: 32px 24px; display: flex; flex-direction: column; gap: 20px; align-items: flex-start;
+  }
+  .offre-bloc h2 { margin-bottom: 0; font-size: clamp(30px, 6vw, 44px); }
+  .offre-bloc p { max-width: 520px; font-size: 17px; line-height: 1.45; }
+
   /* ============ GALERIE ============ */
   .grille-galerie { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .grille-galerie .vignette {
@@ -143,7 +152,7 @@
 <body>
 
 <!-- BARRE D'ANNONCE : texte tout en haut -->
-<div class="annonce">Ouvert du lundi au samedi de 8h à 20h, à Cocody Angré.</div>
+<div class="annonce">Ouvert du lundi au vendredi de 8h à 20h, le samedi de 8h à 18h, à Cocody Angré.</div>
 
 <header>
   <div class="conteneur entete">
@@ -168,7 +177,7 @@
     <div class="conteneur">
       <!-- SLOGAN : modifie ici -->
       <h1>Votre beauté,<br>notre passion.</h1>
-      <p>Salon de coiffure et de soins pour femmes à Cocody Angré. Tresses, tissages, perruques, visage et ongles.</p>
+      <p>Tresses, tissages, perruques, soins du visage et ongles : tout au même endroit, à Cocody Angré.</p>
       <div class="actions">
         <a class="bouton" data-wa href="#contact">Réserver sur WhatsApp</a>
         <a class="bouton contour" href="#services">Voir les prix</a>
@@ -193,6 +202,7 @@
           <h3>Tresses</h3>
           <ul>
             <li>Tresses simples <b>dès 5 000 F</b></li>
+            <li>Tresses collées (cornrows) <b>dès 7 000 F</b></li>
             <li>Tresses africaines (box braids) <b>dès 10 000 F</b></li>
           </ul>
         </div>
@@ -208,14 +218,26 @@
         <div class="carte">
           <h3>Soins</h3>
           <ul>
-            <li>Soin du visage <b>12 000 F</b></li>
+            <li>Soin du visage <b>15 000 F</b></li>
             <li>Manucure <b>5 000 F</b></li>
-            <li>Pédicure <b>6 000 F</b></li>
+            <li>Pédicure <b>7 000 F</b></li>
           </ul>
         </div>
 
       </div>
       <p class="note">Prix en FCFA. « Dès » = prix de départ, le tarif final dépend du modèle choisi.</p>
+    </div>
+  </section>
+
+  <!-- ===== OFFRE DU MOIS =====
+       Chaque mois : change le titre et le texte. Pour la retirer, supprime tout le bloc <section class="offre">…</section> -->
+  <section class="offre" id="offre">
+    <div class="conteneur">
+      <div class="offre-bloc">
+        <h2>Offre du mois</h2>
+        <p>Novembre : 10 % de réduction sur la pose de perruque pour toute nouvelle cliente. Mentionnez ce site à la réservation.</p>
+        <a class="bouton" data-wa href="#contact">J'en profite sur WhatsApp</a>
+      </div>
     </div>
   </section>
 
@@ -246,6 +268,7 @@
       <div class="chiffres">
         <div><strong>100+</strong><span>clientes chaque semaine</span></div>
         <div><strong>5</strong><span>coiffeuses formées</span></div>
+        <div><strong>3 000+</strong><span>clientes depuis 2019</span></div>
         <div><strong>2019</strong><span>année d'ouverture</span></div>
       </div>
     </div>
@@ -257,7 +280,8 @@
       <h2>Horaires &amp; adresse</h2>
       <!-- HORAIRES : modifie ici -->
       <ul class="horaires">
-        <li><span>Lundi au samedi</span><span>8h à 20h</span></li>
+        <li><span>Lundi au vendredi</span><span>8h à 20h</span></li>
+        <li><span>Samedi</span><span>8h à 18h</span></li>
         <li><span>Dimanche</span><span>Fermé</span></li>
       </ul>
       <!-- ADRESSE : modifie ici -->
