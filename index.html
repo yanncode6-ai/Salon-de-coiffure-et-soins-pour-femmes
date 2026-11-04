@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chez Aya Coiffure &amp; Beauté | Cocody Angré, Abidjan</title>
+<meta name="description" content="Salon de coiffure et de beauté pour femmes à Cocody Angré, Abidjan : tresses, tissages, perruques, soins du visage, manucure et pédicure.">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Police Onest (la même que le site d'inspiration). Si elle ne charge pas, le téléphone utilise sa police normale. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ COULEURS (modifie-les ici, ça change tout le site) ============ */
+  :root {
+    --blanc:      #ffffff;
+    --encre:      #1b1416;   /* texte principal */
+    --gris:       #7a6f71;   /* petits textes secondaires */
+    --rose:       #f3d6d9;   /* rose poudré : grandes surfaces */
+    --rose-fort:  #e8b3ba;   /* rose poudré plus soutenu : boutons */
+    --dore:       #b8913f;   /* doré : fines bordures et traits uniquement */
+    --trait:      #efe7e3;   /* séparateurs très discrets */
+
+    --police: 'Onest', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+  body {
+    font-family: var(--police);
+    font-size: 16px;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    color: var(--encre);
+    background: var(--blanc);
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .conteneur { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 64px 0; }
+
+  /* Focus visible au clavier */
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--dore); outline-offset: 3px; }
+
+  /* ============ TITRES : fins et serrés, c'est la signature du style ============ */
+  h1, h2 { font-weight: 200; line-height: 1; color: var(--encre); }
+  h2 { font-size: clamp(34px, 7vw, 52px); letter-spacing: -0.055em; margin-bottom: 32px; }
+
+  /* ============ BOUTONS (forme pilule) ============ */
+  .bouton {
+    display: inline-block; text-decoration: none; cursor: pointer;
+    font: 500 14px/1 var(--police); letter-spacing: -0.01em;
+    padding: 16px 32px; border-radius: 600px; border: 1px solid transparent;
+    background: var(--rose-fort); color: var(--encre);
+    transition: background .2s;
+  }
+  .bouton:hover { background: var(--dore); color: var(--blanc); }
+  .bouton.contour { background: transparent; border-color: var(--encre); }
+  .bouton.contour:hover { background: var(--encre); color: var(--blanc); }
+
+  /* ============ BARRE D'ANNONCE ============ */
+  .annonce { background: var(--encre); color: var(--blanc); text-align: center; font-size: 12px; padding: 8px 16px; letter-spacing: 0; }
+
+  /* ============ EN-TÊTE ============ */
+  header { position: sticky; top: 0; z-index: 10; background: var(--blanc); border-bottom: 1px solid var(--trait); }
+  .entete { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: -0.03em; }
+  .logo span { font-weight: 200; }
+  nav ul { display: none; list-style: none; gap: 28px; }
+  nav a { text-decoration: none; font-size: 14px; }
+  nav a:hover { color: var(--dore); }
+  .entete .bouton { padding: 12px 22px; }
+  @media (min-width: 820px) { nav ul { display: flex; } }
+
+  /* ============ ACCUEIL ============ */
+  .accueil { padding: 48px 0 64px; }
+  .accueil h1 {
+    font-size: clamp(42px, 11.5vw, 124px);
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+    margin-bottom: 28px;
+  }
+  .accueil p { max-width: 420px; color: var(--gris); margin-bottom: 28px; }
+  .accueil .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* Grand bloc rose : remplace-le par une vraie photo du salon dès qu'elle arrive.
+     Pour ça : remplace <div class="photo-hero">…</div> par <img src="photo-salon.jpg" alt="Le salon" class="photo-hero"> */
+  .photo-hero {
+    margin-top: 40px; min-height: 260px; border-radius: 15px; background: var(--rose);
+    border: 1px solid var(--dore);
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+    padding: 20px; font-size: 13px; color: var(--gris); object-fit: cover; width: 100%;
+  }
+  .photo-hero strong { font-weight: 300; font-size: 32px; letter-spacing: -0.05em; color: var(--encre); line-height: 1; }
+
+  /* ============ SERVICES ============ */
+  .grille-services { display: grid; gap: 16px; }
+  .carte {
+    border: 1.5px solid var(--dore); border-radius: 10px; padding: 24px 20px; background: var(--blanc);
+  }
+  .carte h3 { font-weight: 300; font-size: 23px; letter-spacing: -0.04em; margin-bottom: 12px; }
+  .carte ul { list-style: none; }
+  .carte li { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid var(--trait); font-size: 15px; }
+  .carte li b { font-weight: 500; white-space: nowrap; }
+  .note { margin-top: 16px; font-size: 13px; color: var(--gris); }
+  @media (min-width: 820px) { .grille-services { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ============ GALERIE ============ */
+  .grille-galerie { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .grille-galerie .vignette {
+    aspect-ratio: 4 / 5; border-radius: 15px; background: var(--rose); object-fit: cover; width: 100%;
+    display: flex; align-items: flex-end; padding: 14px; font-size: 12px; color: var(--gris);
+  }
+  @media (min-width: 820px) { .grille-galerie { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+
+  /* ============ À PROPOS ============ */
+  .apropos { background: var(--rose); }
+  .apropos .texte { max-width: 560px; font-size: 18px; line-height: 1.5; margin-bottom: 40px; }
+  .chiffres { display: flex; flex-wrap: wrap; gap: 24px 56px; }
+  .chiffres div { min-width: 120px; }
+  .chiffres strong { display: block; font-weight: 200; font-size: clamp(64px, 16vw, 120px); line-height: .9; letter-spacing: -0.07em; }
+  .chiffres span { display: block; margin-top: 10px; font-size: 14px; color: var(--gris); }
+
+  /* ============ HORAIRES ============ */
+  .horaires { max-width: 520px; list-style: none; }
+  .horaires li { display: flex; justify-content: space-between; padding: 14px 0; border-top: 1px solid var(--trait); }
+  .horaires li:last-child { border-bottom: 1px solid var(--trait); color: var(--gris); }
+  .adresse { margin-top: 24px; }
+  .adresse small { display: block; color: var(--gris); font-size: 13px; }
+
+  /* ============ CONTACT ============ */
+  .contact { text-align: left; }
+  .contact .liens { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .contact p { max-width: 420px; color: var(--gris); margin-bottom: 24px; }
+
+  footer { border-top: 1px solid var(--trait); padding: 28px 0 40px; font-size: 13px; color: var(--gris); }
+</style>
+</head>
+
+<body>
+
+<!-- BARRE D'ANNONCE : texte tout en haut -->
+<div class="annonce">Ouvert du lundi au samedi de 8h à 20h, à Cocody Angré.</div>
+
+<header>
+  <div class="conteneur entete">
+    <a href="#accueil" class="logo">CHEZ AYA <span>Coiffure &amp; Beauté</span></a>
+    <nav aria-label="Menu principal">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#horaires">Horaires</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="bouton" data-wa href="#contact">Réserver</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== ACCUEIL ===== -->
+  <section class="accueil" id="accueil">
+    <div class="conteneur">
+      <!-- SLOGAN : modifie ici -->
+      <h1>Votre beauté,<br>notre passion.</h1>
+      <p>Salon de coiffure et de soins pour femmes à Cocody Angré. Tresses, tissages, perruques, visage et ongles.</p>
+      <div class="actions">
+        <a class="bouton" data-wa href="#contact">Réserver sur WhatsApp</a>
+        <a class="bouton contour" href="#services">Voir les prix</a>
+      </div>
+
+      <!-- PHOTO D'ACCUEIL (voir le commentaire dans le CSS pour mettre une vraie photo) -->
+      <div class="photo-hero">
+        <span>Photo du salon à venir</span>
+        <strong>Depuis 2019</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ET PRIX =====
+       Pour changer un prix : modifie juste le nombre dans <b>…</b> -->
+  <section id="services">
+    <div class="conteneur">
+      <h2>Nos services</h2>
+      <div class="grille-services">
+
+        <div class="carte">
+          <h3>Tresses</h3>
+          <ul>
+            <li>Tresses simples <b>dès 5 000 F</b></li>
+            <li>Tresses africaines (box braids) <b>dès 10 000 F</b></li>
+          </ul>
+        </div>
+
+        <div class="carte">
+          <h3>Tissages &amp; perruques</h3>
+          <ul>
+            <li>Tissage + pose <b>dès 15 000 F</b></li>
+            <li>Pose de perruque <b>8 000 F</b></li>
+          </ul>
+        </div>
+
+        <div class="carte">
+          <h3>Soins</h3>
+          <ul>
+            <li>Soin du visage <b>12 000 F</b></li>
+            <li>Manucure <b>5 000 F</b></li>
+            <li>Pédicure <b>6 000 F</b></li>
+          </ul>
+        </div>
+
+      </div>
+      <p class="note">Prix en FCFA. « Dès » = prix de départ, le tarif final dépend du modèle choisi.</p>
+    </div>
+  </section>
+
+  <!-- ===== GALERIE =====
+       Pour ajouter une photo : remplace un bloc <div class="vignette">…</div>
+       par <img class="vignette" src="nom-de-ta-photo.jpg" alt="Description de la coiffure" loading="lazy">
+       (la photo doit être dans le même dépôt GitHub que index.html) -->
+  <section id="galerie">
+    <div class="conteneur">
+      <h2>Nos réalisations</h2>
+      <div class="grille-galerie">
+        <div class="vignette">Photo 1</div>
+        <div class="vignette">Photo 2</div>
+        <div class="vignette">Photo 3</div>
+        <div class="vignette">Photo 4</div>
+        <div class="vignette">Photo 5</div>
+        <div class="vignette">Photo 6</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== À PROPOS ===== -->
+  <section class="apropos" id="apropos">
+    <div class="conteneur">
+      <h2>À propos</h2>
+      <p class="texte">Ouvert en 2019, le salon accueille chaque semaine plus de 100 clientes. Notre équipe de 5 coiffeuses est formée aux dernières tendances. Hygiène et ponctualité sont nos priorités.</p>
+      <!-- CHIFFRES : modifie les nombres ici -->
+      <div class="chiffres">
+        <div><strong>100+</strong><span>clientes chaque semaine</span></div>
+        <div><strong>5</strong><span>coiffeuses formées</span></div>
+        <div><strong>2019</strong><span>année d'ouverture</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HORAIRES ET ADRESSE ===== -->
+  <section id="horaires">
+    <div class="conteneur">
+      <h2>Horaires &amp; adresse</h2>
+      <!-- HORAIRES : modifie ici -->
+      <ul class="horaires">
+        <li><span>Lundi au samedi</span><span>8h à 20h</span></li>
+        <li><span>Dimanche</span><span>Fermé</span></li>
+      </ul>
+      <!-- ADRESSE : modifie ici -->
+      <p class="adresse">Cocody Angré, Abidjan<small>À côté de la pharmacie Les Lauriers</small></p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="conteneur">
+      <h2>Prenez rendez-vous</h2>
+      <p>Écrivez-nous sur WhatsApp avec la coiffure souhaitée et le jour qui vous arrange. Nous vous répondons vite.</p>
+      <div class="liens">
+        <a class="bouton" data-wa href="#contact">Réserver sur WhatsApp</a>
+        <!-- TÉLÉPHONE : à changer aussi dans le JS en bas de page -->
+        <a class="bouton contour" href="tel:+2250700000000">Appeler le 07 00 00 00 00</a>
+        <!-- INSTAGRAM : change le nom du compte dans le lien -->
+        <a class="bouton contour" href="https://instagram.com/chezayacoiffure" target="_blank" rel="noopener">Instagram @chezayacoiffure</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="conteneur">© 2026 Chez Aya Coiffure &amp; Beauté. Cocody Angré, Abidjan.</div>
+</footer>
+
+<script>
+  /* ====== NUMÉRO WHATSAPP : à changer ICI UNE SEULE FOIS ======
+     Format : indicatif pays + numéro, sans + ni espaces (225 = Côte d'Ivoire).
+     Il met à jour tous les boutons WhatsApp du site. */
+  var NUMERO_WHATSAPP = "2250700000000";
+  var MESSAGE = "Bonjour, je voudrais prendre rendez-vous au salon Chez Aya.";
+
+  var lien = "https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(MESSAGE);
+  document.querySelectorAll("[data-wa]").forEach(function (a) {
+    a.href = lien;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+</script>
+
+</body>
+</html>
