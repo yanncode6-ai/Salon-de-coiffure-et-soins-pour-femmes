@@ -92,7 +92,7 @@
     margin-top: 40px; min-height: 260px; border-radius: 15px; background: var(--rose);
     border: 1px solid var(--dore);
     display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
-    padding: 20px; font-size: 13px; color: var(--gris); object-fit: cover; width: 100%;
+    padding: 0; object-fit: cover; object-position: 50% 28%; width: 100%; height: clamp(340px, 75vw, 560px);
   }
   .photo-hero strong { font-weight: 300; font-size: 32px; letter-spacing: -0.05em; color: var(--encre); line-height: 1; }
 
@@ -120,7 +120,7 @@
   /* ============ GALERIE ============ */
   .grille-galerie { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .grille-galerie .vignette {
-    aspect-ratio: 4 / 5; border-radius: 15px; background: var(--rose); object-fit: cover; width: 100%;
+    aspect-ratio: 4 / 5; object-position: 50% 20%; border-radius: 15px; background: var(--rose); object-fit: cover; width: 100%;
     display: flex; align-items: flex-end; padding: 14px; font-size: 12px; color: var(--gris);
   }
   @media (min-width: 820px) { .grille-galerie { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
@@ -184,10 +184,7 @@
       </div>
 
       <!-- PHOTO D'ACCUEIL (voir le commentaire dans le CSS pour mettre une vraie photo) -->
-      <div class="photo-hero">
-        <span>Photo du salon à venir</span>
-        <strong>Depuis 2019</strong>
-      </div>
+      <img class="photo-hero" src="accueil.jpg" alt="Cliente souriante avec des box braids dans le salon Chez Aya" width="854" height="1281">
     </div>
   </section>
 
@@ -249,12 +246,12 @@
     <div class="conteneur">
       <h2>Nos réalisations</h2>
       <div class="grille-galerie">
-        <div class="vignette">Photo 1</div>
-        <div class="vignette">Photo 2</div>
-        <div class="vignette">Photo 3</div>
-        <div class="vignette">Photo 4</div>
-        <div class="vignette">Photo 5</div>
-        <div class="vignette">Photo 6</div>
+        <img class="vignette" src="galerie1.jpg" alt="Tresses africaines" loading="lazy" width="800" height="1000">
+        <img class="vignette" src="galerie2.jpg" alt="Tresses collées (cornrows)" loading="lazy" width="800" height="1000">
+        <img class="vignette" src="galerie3.jpg" alt="Tissage lisse" loading="lazy" width="800" height="1000">
+        <img class="vignette" src="galerie4.jpg" alt="Perruque ondulée posée au salon" loading="lazy" width="800" height="1000">
+        <img class="vignette" src="galerie5.jpg" alt="Manucure rose poudré" loading="lazy" width="800" height="1000">
+        <img class="vignette" src="galerie6.jpg" alt="Soin du visage" loading="lazy" width="800" height="1000">
       </div>
     </div>
   </section>
