@@ -146,10 +146,91 @@
   .contact p { max-width: 420px; color: var(--gris); margin-bottom: 24px; }
 
   footer { border-top: 1px solid var(--trait); padding: 28px 0 40px; font-size: 13px; color: var(--gris); }
+
+  /* ==================================================================
+     ANIMATIONS  (tout ce bloc peut être supprimé : le site marche sans)
+     Règle : on n'anime que "transform" et "opacity" = fluide sur téléphone
+     ================================================================== */
+
+  /* Barre de progression dorée tout en haut */
+  .progression { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--dore); transform: scaleX(0); transform-origin: left; z-index: 50; }
+
+  /* Entrée de l'accueil : le slogan "monte" ligne par ligne */
+  .ligne { display: block; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
+  .ligne > span { display: inline-block; transform: translateY(115%); animation: monte 1.1s cubic-bezier(.2,.8,.2,1) forwards; }
+  .ligne:nth-child(2) > span { animation-delay: .15s; }
+  @keyframes monte { to { transform: translateY(0); } }
+
+  .entree { opacity: 0; transform: translateY(24px); animation: entree .9s ease forwards; animation-delay: var(--d, 0s); }
+  @keyframes entree { to { opacity: 1; transform: none; } }
+
+  /* La photo d'accueil se dévoile de haut en bas */
+  .photo-hero { animation: revele 1.3s cubic-bezier(.2,.8,.2,1) .7s both; }
+  @keyframes revele { from { clip-path: inset(0 0 100% 0 round 15px); } to { clip-path: inset(0 0 0 0 round 15px); } }
+
+  /* Grand cercle rose avec une petite bille dorée qui tourne autour (ordinateur seulement) */
+  .accueil { position: relative; overflow: hidden; }
+  .accueil .conteneur { position: relative; }
+  .accueil .conteneur > * { position: relative; z-index: 1; }
+  .accueil .conteneur > .anneau { display: none; }
+  @media (min-width: 820px) {
+    .accueil .conteneur > .anneau {
+      display: block; position: absolute; z-index: 0; right: 6%; top: 110px;
+      width: min(32vw, 380px); aspect-ratio: 1; border-radius: 50%; background: var(--rose);
+      animation: tourne 16s linear infinite;
+    }
+    .anneau::before { content: ""; position: absolute; inset: -20px; border: 1.5px solid var(--dore); border-radius: 50%; }
+    .anneau::after { content: ""; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--dore); top: -29px; left: calc(50% - 9px); }
+  }
+  @keyframes tourne { to { transform: rotate(360deg); } }
+
+  /* Bandeau qui défile */
+  .defile { overflow: hidden; border-top: 1px solid var(--dore); border-bottom: 1px solid var(--dore); padding: 16px 0; }
+  .piste { display: flex; width: max-content; animation: defile 30s linear infinite; }
+  .defile:hover .piste { animation-play-state: paused; }
+  .piste span { font-weight: 200; font-size: clamp(26px, 6vw, 52px); letter-spacing: -0.05em; white-space: nowrap; padding-right: 36px; display: flex; align-items: center; gap: 36px; }
+  .piste span::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--dore); flex: none; }
+  @keyframes defile { to { transform: translateX(-50%); } }
+
+  /* Apparition au défilement (la classe .reveal est ajoutée par le JS) */
+  .reveal { opacity: 0; transform: translateY(34px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* Survols */
+  nav a { position: relative; }
+  nav a::after { content: ""; position: absolute; left: 0; bottom: -5px; width: 100%; height: 1px; background: var(--dore); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+  nav a:hover::after { transform: scaleX(1); }
+
+  .carte.visible:hover { transform: translateY(-6px); transition: transform .3s, border-color .3s; border-color: var(--encre); }
+  .carte li { transition: transform .25s; }
+  .carte li:hover { transform: translateX(8px); }
+  .grille-galerie .vignette.visible:hover { transform: scale(1.04); transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+
+  /* Boutons : reflet qui passe au survol + le bouton principal de l'accueil "respire" */
+  .bouton { position: relative; overflow: hidden; isolation: isolate; }
+  .bouton::before { content: ""; position: absolute; top: 0; bottom: 0; left: -80%; width: 50%; z-index: -1; background: linear-gradient(100deg, transparent, rgba(255,255,255,.6), transparent); transform: skewX(-20deg); }
+  .bouton:hover::before { animation: reflet .7s ease; }
+  @keyframes reflet { to { left: 140%; } }
+  .accueil .bouton:not(.contour) { animation: pouls 2.6s ease-out 2s infinite; }
+  @keyframes pouls { 0% { box-shadow: 0 0 0 0 rgba(232,179,186,.75); } 70%, 100% { box-shadow: 0 0 0 16px rgba(232,179,186,0); } }
+
+  /* Offre du mois : un reflet doré passe lentement */
+  .offre-bloc { position: relative; overflow: hidden; }
+  .offre-bloc::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 35%; pointer-events: none; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); animation: brille 6s ease-in-out infinite; }
+  @keyframes brille { 0%, 55% { left: -60%; } 100% { left: 140%; } }
+
+  /* Personnes qui préfèrent moins de mouvement : tout est affiché sans animation */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .ligne > span, .entree, .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
 </style>
 </head>
 
 <body>
+
+<div class="progression" id="progression"></div>
 
 <!-- BARRE D'ANNONCE : texte tout en haut -->
 <div class="annonce">Ouvert du lundi au vendredi de 8h à 20h, le samedi de 8h à 18h, à Cocody Angré.</div>
@@ -175,10 +256,11 @@
   <!-- ===== ACCUEIL ===== -->
   <section class="accueil" id="accueil">
     <div class="conteneur">
+      <div class="anneau" aria-hidden="true"></div>
       <!-- SLOGAN : modifie ici -->
-      <h1>Votre beauté,<br>notre passion.</h1>
-      <p>Tresses, tissages, perruques, soins du visage et ongles : tout au même endroit, à Cocody Angré.</p>
-      <div class="actions">
+      <h1><span class="ligne"><span>Votre beauté,</span></span><span class="ligne"><span>notre passion.</span></span></h1>
+      <p class="entree" style="--d:.45s">Tresses, tissages, perruques, soins du visage et ongles : tout au même endroit, à Cocody Angré.</p>
+      <div class="actions entree" style="--d:.6s">
         <a class="bouton" data-wa href="#contact">Réserver sur WhatsApp</a>
         <a class="bouton contour" href="#services">Voir les prix</a>
       </div>
@@ -187,6 +269,14 @@
       <img class="photo-hero" src="accueil.jpg" alt="Cliente souriante avec des box braids dans le salon Chez Aya" width="854" height="1281">
     </div>
   </section>
+
+  <!-- ===== BANDEAU QUI DÉFILE : modifie les mots ici (garde les deux groupes identiques) ===== -->
+  <div class="defile" aria-hidden="true">
+    <div class="piste">
+      <span>Tresses</span><span>Tissages</span><span>Perruques</span><span>Soins du visage</span><span>Manucure</span><span>Pédicure</span>
+      <span>Tresses</span><span>Tissages</span><span>Perruques</span><span>Soins du visage</span><span>Manucure</span><span>Pédicure</span>
+    </div>
+  </div>
 
   <!-- ===== SERVICES ET PRIX =====
        Pour changer un prix : modifie juste le nombre dans <b>…</b> -->
@@ -266,7 +356,7 @@
         <div><strong>100+</strong><span>clientes chaque semaine</span></div>
         <div><strong>5</strong><span>coiffeuses formées</span></div>
         <div><strong>3 000+</strong><span>clientes depuis 2019</span></div>
-        <div><strong>2019</strong><span>année d'ouverture</span></div>
+        <div><strong data-annee>2019</strong><span>année d'ouverture</span></div>
       </div>
     </div>
   </section>
@@ -320,6 +410,67 @@
     a.target = "_blank";
     a.rel = "noopener";
   });
+</script>
+
+<script>
+  /* ====== ANIMATIONS (apparition au défilement, compteurs, barre de progression) ====== */
+  (function () {
+    var reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Barre de progression
+    var barre = document.getElementById("progression");
+    var attente = false;
+    function maj() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      barre.style.transform = "scaleX(" + (h > 0 ? window.scrollY / h : 0) + ")";
+      attente = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!attente) { attente = true; requestAnimationFrame(maj); }
+    }, { passive: true });
+
+    if (reduit || !("IntersectionObserver" in window)) return;
+
+    // Compteurs : 0 -> valeur finale
+    document.querySelectorAll(".chiffres strong").forEach(function (s) {
+      var t = s.textContent;
+      s.dataset.n = parseInt(t.replace(/\s/g, ""), 10);
+      s.dataset.suf = t.replace(/[\d\s]/g, "");
+    });
+    function compte(s) {
+      var n = +s.dataset.n, suf = s.dataset.suf, annee = s.hasAttribute("data-annee");
+      var base = annee ? n - 40 : 0, t0 = null;
+      function pas(t) {
+        if (!t0) t0 = t;
+        var p = Math.min((t - t0) / 1600, 1);
+        var v = Math.round(base + (n - base) * (1 - Math.pow(1 - p, 3)));
+        s.textContent = (annee ? v : v.toLocaleString("fr-FR")).replace(/\u202f/g, "\u00a0") + suf;
+        if (p < 1) requestAnimationFrame(pas);
+      }
+      requestAnimationFrame(pas);
+    }
+
+    // Apparition au défilement
+    var cibles = document.querySelectorAll("main h2, .carte, .note, .vignette, .apropos .texte, .chiffres > div, .horaires li, .adresse, .contact p, .contact .liens, .offre-bloc");
+    var obs = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        el.classList.add("visible");
+        obs.unobserve(el);
+        setTimeout(function () { el.style.transitionDelay = "0s"; }, 1500);
+        var s = el.querySelector("strong");
+        if (s && el.parentNode.classList.contains("chiffres")) compte(s);
+      });
+    }, { threshold: 0.15 });
+
+    cibles.forEach(function (el) {
+      el.classList.add("reveal");
+      var rang = Array.prototype.indexOf.call(el.parentNode.children, el) % 6;
+      el.style.transitionDelay = (rang * 90) + "ms";
+      obs.observe(el);
+    });
+  })();
 </script>
 
 </body>
