@@ -125,6 +125,14 @@
   }
   @media (min-width: 820px) { .grille-galerie { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }
 
+  /* ============ AVIS DES CLIENTES ============ */
+  .grille-avis { display: grid; gap: 16px; }
+  .avis-carte { border: 1px solid var(--trait); border-radius: 10px; padding: 28px 22px; background: var(--blanc); }
+  .avis-carte .etoiles { color: var(--dore); letter-spacing: .15em; font-size: 15px; margin-bottom: 14px; }
+  .avis-carte blockquote { font-weight: 300; font-size: 20px; line-height: 1.35; letter-spacing: -0.03em; margin-bottom: 18px; }
+  .avis-carte cite { font-style: normal; font-size: 14px; color: var(--gris); }
+  @media (min-width: 820px) { .grille-avis { grid-template-columns: repeat(3, 1fr); } }
+
   /* ============ À PROPOS ============ */
   .apropos { background: var(--rose); }
   .apropos .texte { max-width: 560px; font-size: 18px; line-height: 1.5; margin-bottom: 40px; }
@@ -316,7 +324,7 @@
     <div class="conteneur">
       <div class="offre-bloc">
         <h2>Offre du mois</h2>
-        <p>Décembre : 10 % de réduction sur les tissages + pose. Offre valable jusqu’au 31 décembre. Mentionnez ce site à la réservation.</p>
+        <p>Décembre : 10 % de réduction sur les tissages + pose. Offre valable jusqu’au 31 décembre.</p>
         <a class="bouton" data-wa href="#contact">J'en profite sur WhatsApp</a>
       </div>
     </div>
@@ -336,6 +344,36 @@
         <img class="vignette" src="galerie4.jpg" alt="Perruque ondulée posée au salon" loading="lazy" width="800" height="1000">
         <img class="vignette" src="galerie5.jpg" alt="Manucure rose poudré" loading="lazy" width="800" height="1000">
         <img class="vignette" src="galerie6.jpg" alt="Soin du visage" loading="lazy" width="800" height="1000">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AVIS DES CLIENTES =====
+       Pour changer un avis : modifie le texte dans <blockquote> et le nom dans <cite>.
+       Pour en ajouter un : copie un bloc <div class="avis-carte">…</div> en entier. -->
+  <section id="avis">
+    <div class="conteneur">
+      <h2>Avis de nos clientes</h2>
+      <div class="grille-avis">
+
+        <div class="avis-carte">
+          <div class="etoiles" aria-label="5 étoiles sur 5">★★★★★</div>
+          <blockquote>« Mes box braids ont tenu 2 mois, je recommande. »</blockquote>
+          <cite>Mariam, étudiante</cite>
+        </div>
+
+        <div class="avis-carte">
+          <div class="etoiles" aria-label="5 étoiles sur 5">★★★★★</div>
+          <blockquote>« Salon très propre et ponctuel, on ne perd pas de temps. »</blockquote>
+          <cite>Fatou, Cocody</cite>
+        </div>
+
+        <div class="avis-carte">
+          <div class="etoiles" aria-label="5 étoiles sur 5">★★★★★</div>
+          <blockquote>« Le soin du visage m’a vraiment détendue. »</blockquote>
+          <cite>Nadège, Angré</cite>
+        </div>
+
       </div>
     </div>
   </section>
@@ -445,7 +483,7 @@
     }
 
     // Apparition au défilement
-    var cibles = document.querySelectorAll("main h2, .carte, .note, .vignette, .apropos .texte, .chiffres > div, .horaires li, .adresse, .contact p, .contact .liens, .offre-bloc");
+    var cibles = document.querySelectorAll("main h2, .carte, .note, .vignette, .apropos .texte, .chiffres > div, .horaires li, .adresse, .contact p, .contact .liens, .offre-bloc, .avis-carte");
     var obs = new IntersectionObserver(function (entrees) {
       entrees.forEach(function (e) {
         if (!e.isIntersecting) return;
