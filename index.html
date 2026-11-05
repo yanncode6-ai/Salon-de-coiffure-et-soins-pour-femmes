@@ -168,21 +168,12 @@
   .photo-hero { animation: revele 1.3s cubic-bezier(.2,.8,.2,1) .7s both; }
   @keyframes revele { from { clip-path: inset(0 0 100% 0 round 15px); } to { clip-path: inset(0 0 0 0 round 15px); } }
 
-  /* Grand cercle rose avec une petite bille dorée qui tourne autour (ordinateur seulement) */
-  .accueil { position: relative; overflow: hidden; }
-  .accueil .conteneur { position: relative; }
-  .accueil .conteneur > * { position: relative; z-index: 1; }
-  .accueil .conteneur > .anneau { display: none; }
+  /* Accueil : sur ordinateur, texte à gauche et photo à droite */
   @media (min-width: 820px) {
-    .accueil .conteneur > .anneau {
-      display: block; position: absolute; z-index: 0; right: 6%; top: 110px;
-      width: min(32vw, 380px); aspect-ratio: 1; border-radius: 50%; background: var(--rose);
-      animation: tourne 16s linear infinite;
-    }
-    .anneau::before { content: ""; position: absolute; inset: -20px; border: 1.5px solid var(--dore); border-radius: 50%; }
-    .anneau::after { content: ""; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--dore); top: -29px; left: calc(50% - 9px); }
+    .hero-bas { display: grid; grid-template-columns: 1fr minmax(0, 440px); gap: 56px; align-items: end; }
+    .hero-bas .photo-hero { margin-top: 0; max-width: none; height: 460px; }
   }
-  @keyframes tourne { to { transform: rotate(360deg); } }
+  .accueil { position: relative; overflow: hidden; }
 
   /* Bandeau qui défile */
   .defile { overflow: hidden; border-top: 1px solid var(--dore); border-bottom: 1px solid var(--dore); padding: 16px 0; }
@@ -256,17 +247,20 @@
   <!-- ===== ACCUEIL ===== -->
   <section class="accueil" id="accueil">
     <div class="conteneur">
-      <div class="anneau" aria-hidden="true"></div>
       <!-- SLOGAN : modifie ici -->
       <h1><span class="ligne"><span>Votre beauté,</span></span><span class="ligne"><span>notre passion.</span></span></h1>
+      <div class="hero-bas">
+      <div class="hero-texte">
       <p class="entree" style="--d:.45s">Tresses, tissages, perruques, soins du visage et ongles : tout au même endroit, à Cocody Angré.</p>
       <div class="actions entree" style="--d:.6s">
         <a class="bouton" data-wa href="#contact">Réserver sur WhatsApp</a>
         <a class="bouton contour" href="#services">Voir les prix</a>
       </div>
+      </div>
 
       <!-- PHOTO D'ACCUEIL (voir le commentaire dans le CSS pour mettre une vraie photo) -->
       <img class="photo-hero" src="accueil.jpg" alt="Cliente souriante avec des box braids dans le salon Chez Aya" width="854" height="1281">
+      </div>
     </div>
   </section>
 
@@ -444,7 +438,7 @@
         if (!t0) t0 = t;
         var p = Math.min((t - t0) / 1600, 1);
         var v = Math.round(base + (n - base) * (1 - Math.pow(1 - p, 3)));
-        s.textContent = (annee ? v : v.toLocaleString("fr-FR")).replace(/\u202f/g, "\u00a0") + suf;
+        s.textContent = String(annee ? v : v.toLocaleString("fr-FR")).replace(/\u202f/g, "\u00a0") + suf;
         if (p < 1) requestAnimationFrame(pas);
       }
       requestAnimationFrame(pas);
